@@ -1,5 +1,7 @@
 package com.resume.controllers;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class RoleController {
 	@Autowired
 	RoleRepository repository;
 	
+	@PersistenceContext
+	private EntityManager manager;
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new RoleValidation());
@@ -38,7 +43,8 @@ public class RoleController {
 	@RequestMapping("/list")
 	public ModelAndView showRoles() {
 		ModelAndView modelAndView = new ModelAndView("role/roleList");
-		modelAndView.addObject("roles", repository.findAll());
+		//modelAndView.addObject("roles", repository.findAll());
+		modelAndView.addObject("roles", manager.createQuery("select r from Role r", Role.class).getResultList());
 		return modelAndView;
 	}
 
