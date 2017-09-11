@@ -21,12 +21,14 @@
 							<label for="code" class="col-sm-2 control-label">${codeLabel }</label>
 							<div class="col-sm-10">
 								<form:input path="code" type="text" class="form-control" id="code" placeholder="${codeLabel }"/>
+								<form:errors path="code" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="description" class="col-sm-2 control-label">${descriptionLabel }</label>
 							<div class="col-sm-10">
 								<form:input path="description" type="text" class="form-control" id="description" placeholder="${descriptionLabel }"/>
+								<form:errors path="description" />
 							</div>
 						</div>
 						<div class="form-group">
