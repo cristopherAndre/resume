@@ -18,7 +18,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="user_resume")
+@Table(name="user_profile")
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
