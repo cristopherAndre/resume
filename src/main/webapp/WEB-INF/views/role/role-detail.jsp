@@ -5,8 +5,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
-<fmt:message key="role.page.roleDetail.title" var="titleLabel" />
-<fmt:message key="role.page.roleDetail.not.found" var="notFoundLabel" />
+<fmt:message key="role.page.role-detail.title" var="titleLabel" />
+<fmt:message key="role.page.role-detail.not.found" var="notFoundLabel" />
 <fmt:message key="role.code" var="codeLabel" />
 <fmt:message key="role.description" var="descriptionLabel" />
 

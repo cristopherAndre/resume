@@ -5,8 +5,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
-<fmt:message key="role.page.roleList.title" var="titleLabel" />
-<fmt:message key="role.page.roleList.not.found" var="notFoundLabel" />
+<fmt:message key="role.page.role-list.title" var="titleLabel" />
+<fmt:message key="role.page.role-list.not.found" var="notFoundLabel" />
 <fmt:message key="role.code" var="codeLabel" />
 <fmt:message key="role.description" var="descriptionLabel" />
 
@@ -24,6 +24,7 @@
 									<tr>
 										<th>${codeLabel }</th>
 										<th>${descriptionLabel }</th>
+										<th>Ações</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -31,6 +32,11 @@
 										<tr>
 											<td>${role.code }</td>
 											<td><a href="${s:mvcUrl('RC#showRoleDetail').arg(0,role.code).build() }">${role.description }</a></td>
+											<td>
+												<a href="${s:mvcUrl('RC#load').arg(0,role.code).build() }">Editar</a>
+												&nbsp;
+												<a href="${s:mvcUrl('RC#remove').arg(0,role.code).build() }">Remover</a>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>

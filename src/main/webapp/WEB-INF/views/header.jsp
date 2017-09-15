@@ -31,7 +31,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Roles <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="${s:mvcUrl('RC#showRoles').build() }">Listar</a></li>
-						<li><a href="${s:mvcUrl('RC#form').build() }">Criar</a></li>
+						<li><a href="${s:mvcUrl('RC#formAdd').build() }">Criar</a></li>
 					</ul>
 				</li>
 			</ul>
