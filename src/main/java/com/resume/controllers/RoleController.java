@@ -38,7 +38,7 @@ public class RoleController {
 	@RequestMapping(value = "/detail/{code}", method = RequestMethod.GET)
 	public ModelAndView showRoleDetail(@PathVariable("code") String code) {
 		ModelAndView modelAndView = new ModelAndView("role/role-detail");
-		modelAndView.addObject("role", repository.findByCode(code).size() > 0 ? repository.findByCode(code).get(0) : null);
+		modelAndView.addObject("role", repository.findByCode(code));
 		return modelAndView;
 	}
 
@@ -59,7 +59,7 @@ public class RoleController {
 	@RequestMapping("/{code}")
 	public ModelAndView load(@PathVariable("code") String code) {
 		ModelAndView modelAndView = new ModelAndView("role/role-form-update");
-		modelAndView.addObject("role", repository.findByCode(code).size() > 0 ? repository.findByCode(code).get(0) : null);
+		modelAndView.addObject("role", repository.findByCode(code));
 		return modelAndView;
 	}
 	

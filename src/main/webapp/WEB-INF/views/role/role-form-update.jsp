@@ -7,6 +7,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
 <fmt:message key="role.page.role-form-update.title" var="titleLabel" />
+<fmt:message key="role.page.role-form-update.not.found" var="notFoundLabel" />
 <fmt:message key="button.save" var="saveLabel" />
 
 <tags:pageTemplate pageTitle="${titleLabel }">
@@ -15,14 +16,21 @@
 			<div class="row" align="center">
 				<div class="col-md-12">
 					<h2>${titleLabel }</h2>
-					<form:form class="form-horizontal" action="${s:mvcUrl('RC#update').arg(0,role.code).build() } }" method="POST" commandName="role">
-						<role:role-form-inputs/>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-primary">${saveLabel }</button>
-							</div>
-						</div>
-					</form:form>
+					<c:choose>
+						<c:when test="${not empty role }">
+							<form:form class="form-horizontal" action="${s:mvcUrl('RC#update').arg(0,role.code).build() } }" method="POST" commandName="role">
+								<role:role-form-inputs/>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-primary">${saveLabel }</button>
+									</div>
+								</div>
+							</form:form>
+						</c:when>
+						<c:otherwise>
+							<h2>${notFoundLabel }</h2>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
