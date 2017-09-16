@@ -22,7 +22,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="${s:mvcUrl('UC#showUsers').build() }">Listar</a></li>
-						<li><a href="#">Criar</a></li>
+						<li><a href="${s:mvcUrl('UC#formAdd').build() }">Criar</a></li>
 					</ul>
 				</li>
 			</ul>

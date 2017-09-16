@@ -1,17 +1,15 @@
 package com.resume.validation;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.resume.daos.RoleRepository;
 import com.resume.models.Role;
 
 public class RoleValidation implements Validator {
 
-	@Autowired
-	RoleRepository repository;
+//	@Autowired
+//	RoleRepository repository;
 	
 	private static String FIELD_REQUIRED = "field.required";
 //	private static String CODE_ALREDY_EXISTS = "role.code.already.exists";

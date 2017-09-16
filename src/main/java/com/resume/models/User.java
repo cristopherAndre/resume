@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -38,7 +39,7 @@ public class User implements UserDetails {
 	private String aboutMe;
 	private String resumeFilePath;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Role> roles = new ArrayList<Role>();
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

@@ -1,0 +1,30 @@
+<%@ taglib tagdir="/WEB-INF/tags" prefix="tags" %>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="user" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
+
+<fmt:message key="user.page.user-form-add.title" var="titleLabel" />
+<fmt:message key="button.save" var="saveLabel" />
+
+<tags:pageTemplate pageTitle="${titleLabel }">
+	<jsp:body>
+		<div class="container-fluid">
+			<div class="row" align="center">
+				<div class="col-md-12">
+					<h2>${titleLabel }</h2>
+					<form:form class="form-horizontal" action="${s:mvcUrl('UC#save').build() }" method="POST" commandName="user">
+						<user:user-form-inputs/>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-primary">${saveLabel }</button>
+							</div>
+						</div>
+					</form:form>
+				</div>
+			</div>
+		</div>
+	</jsp:body>
+</tags:pageTemplate>

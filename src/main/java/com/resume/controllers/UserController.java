@@ -1,13 +1,21 @@
 package com.resume.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.resume.daos.UserRepository;
+import com.resume.models.User;
+import com.resume.validation.UserValidation;
 
 @Controller
 @RequestMapping("/user")
@@ -15,6 +23,11 @@ public class UserController {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(new UserValidation());
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView showUsers() {
@@ -29,5 +42,22 @@ public class UserController {
 		modelAndView.addObject("user", repository.findByNickName(nickName));
 		return modelAndView;
 	};
+	
+	@RequestMapping(value = "/form-add", method = RequestMethod.GET)
+	public ModelAndView formAdd(User user) {
+		return new ModelAndView("user/user-form-add");
+	}
+	
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public ModelAndView save(@Valid User user, BindingResult result) {
+		if (result.hasErrors()) {
+			return formAdd(user);
+		}
+		if(user.getPassword() != null){
+			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		}
+		repository.save(user);
+		return new ModelAndView("redirect:/user/list");
+	}
 
 }
