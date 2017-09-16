@@ -66,7 +66,7 @@ public class RoleController {
 	@RequestMapping("/remove/{code}")
 	public ModelAndView remove(@PathVariable("code") String code) {
 		repository.delete(repository.findByCode(code));
-		return showRoles();
+		return new ModelAndView("redirect:/role/list");
 	}
 	
 	@RequestMapping("/update/{code}")
@@ -75,7 +75,7 @@ public class RoleController {
 			return new ModelAndView("role/role-form-update");
 		}
 		repository.save(role);
-		return showRoles();
+		return new ModelAndView("redirect:/role/list");
 	}
 
 }
