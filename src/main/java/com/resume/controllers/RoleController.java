@@ -35,10 +35,10 @@ public class RoleController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/detail/{code}", method = RequestMethod.GET)
-	public ModelAndView showRoleDetail(@PathVariable("code") String code) {
+	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+	public ModelAndView showRoleDetail(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("role/role-detail");
-		modelAndView.addObject("role", repository.findByCode(code));
+		modelAndView.addObject("role", repository.findById(id));
 		return modelAndView;
 	}
 
@@ -56,21 +56,22 @@ public class RoleController {
 		return new ModelAndView("redirect:/role/list");
 	}
 	
-	@RequestMapping("/{code}")
-	public ModelAndView load(@PathVariable("code") String code) {
+	@RequestMapping("/{id}")
+	public ModelAndView load(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("role/role-form-update");
-		modelAndView.addObject("role", repository.findByCode(code));
+		modelAndView.addObject("role", repository.findById(id));
 		return modelAndView;
 	}
 	
-	@RequestMapping("/remove/{code}")
-	public ModelAndView remove(@PathVariable("code") String code) {
-		repository.delete(repository.findByCode(code));
+	@RequestMapping("/remove/{id}")
+	public ModelAndView remove(@PathVariable("id") Integer id) {
+		repository.delete(repository.findById(id));
 		return new ModelAndView("redirect:/role/list");
 	}
 	
-	@RequestMapping("/update/{code}")
-	public ModelAndView update(@PathVariable("code") String code, @Valid Role role, BindingResult result) {
+	@RequestMapping("/update/{id}")
+	public ModelAndView update(@PathVariable("id") Integer id, @Valid Role role, BindingResult result) {
+		role.setId(id);
 		if (result.hasErrors()) {
 			return new ModelAndView("role/role-form-update");
 		}

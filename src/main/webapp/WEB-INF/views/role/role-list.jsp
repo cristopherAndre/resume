@@ -31,11 +31,11 @@
 									<c:forEach items="${roles }" var="role">
 										<tr>
 											<td>${role.code }</td>
-											<td><a href="${s:mvcUrl('RC#showRoleDetail').arg(0,role.code).build() }">${role.description }</a></td>
+											<td><a href="${s:mvcUrl('RC#showRoleDetail').arg(0,role.id).build() }">${role.description }</a></td>
 											<td>
-												<a href="${s:mvcUrl('RC#load').arg(0,role.code).build() }">Editar</a>
+												<a href="${s:mvcUrl('RC#load').arg(0,role.id).build() }">Editar</a>
 												&nbsp;
-												<a href="${s:mvcUrl('RC#remove').arg(0,role.code).build() }">Remover</a>
+												<a href="${s:mvcUrl('RC#remove').arg(0,role.id).build() }">Remover</a>
 											</td>
 										</tr>
 									</c:forEach>

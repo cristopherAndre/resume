@@ -18,7 +18,7 @@
 					<h2>${titleLabel }</h2>
 					<c:choose>
 						<c:when test="${not empty role }">
-							<form:form class="form-horizontal" action="${s:mvcUrl('RC#update').arg(0,role.code).build() } }" method="POST" commandName="role">
+							<form:form class="form-horizontal" action="${s:mvcUrl('RC#update').arg(0,role.id).build() }" method="POST" commandName="role">
 								<role:role-form-inputs/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
