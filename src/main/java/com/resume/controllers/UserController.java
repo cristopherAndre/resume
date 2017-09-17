@@ -59,5 +59,28 @@ public class UserController {
 		repository.save(user);
 		return new ModelAndView("redirect:/user/list");
 	}
+	
+	@RequestMapping("/{id}")
+	public ModelAndView load(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("user/user-form-update");
+		modelAndView.addObject("user", repository.findById(id));
+		return modelAndView;
+	}
+	
+	@RequestMapping("/remove/{id}")
+	public ModelAndView remove(@PathVariable("id") Integer id) {
+		repository.delete(repository.findById(id));
+		return new ModelAndView("redirect:/user/list");
+	}
+	
+	@RequestMapping("/update/{id}")
+	public ModelAndView update(@PathVariable("id") Integer id, @Valid User user, BindingResult result) {
+		user.setId(id);
+		if (result.hasErrors()) {
+			return new ModelAndView("user/user-form-update");
+		}
+		repository.save(user);
+		return new ModelAndView("redirect:/user/list");
+	}
 
 }

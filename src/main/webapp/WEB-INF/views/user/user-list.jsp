@@ -26,6 +26,7 @@
 										<th>${nicknameLabel }</th>
 										<th>${emailLabel }</th>
 										<th>${passwordLabel }</th>
+										<th>Ações</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -34,6 +35,11 @@
 											<td><a href="${s:mvcUrl('UC#showUserDetail').arg(0,user.nickName).build() }">${user.nickName }</a></td>
 											<td>${user.mail }</td>
 											<td>${user.password }</td>
+											<td>
+												<a href="${s:mvcUrl('UC#load').arg(0,user.id).build() }">Editar</a>
+												&nbsp;
+												<a href="${s:mvcUrl('UC#remove').arg(0,user.id).build() }">Remover</a>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
