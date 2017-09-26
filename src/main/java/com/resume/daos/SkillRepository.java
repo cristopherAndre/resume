@@ -6,4 +6,6 @@ import com.resume.models.Skill;
 
 public interface SkillRepository extends CrudRepository<Skill, Long> {
 
+	Skill findById(int id);
+
 }
