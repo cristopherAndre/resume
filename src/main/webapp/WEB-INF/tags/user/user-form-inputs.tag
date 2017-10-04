@@ -28,6 +28,7 @@
 		<form:errors path="password" />
 	</div>
 </div>
+<!-- 
 <div class="form-group">
 	<label for="skills" class="col-sm-2 control-label">Skills</label>
 	<div class="col-sm-10">		
@@ -35,3 +36,4 @@
 		<form:errors path="skills"/>
 	</div>
 </div>
+ -->
