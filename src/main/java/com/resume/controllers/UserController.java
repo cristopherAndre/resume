@@ -36,10 +36,10 @@ public class UserController {
 		return modelAndView;
 	};
 
-	@RequestMapping(value = "/detail/{nickName}", method = RequestMethod.GET)
-	public ModelAndView showUserDetail(@PathVariable("nickName") String nickName) {
+	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+	public ModelAndView showUserDetail(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("user/user-detail");
-		modelAndView.addObject("user", repository.findByNickName(nickName));
+		modelAndView.addObject("user", repository.findById(id));
 		return modelAndView;
 	};
 	

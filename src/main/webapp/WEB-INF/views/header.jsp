@@ -4,38 +4,80 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
-<!-- bootstrap -->
-<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-theme.min.css'/>">
+<fmt:message key="general.app.name" var="generalAppNameLabel" />
+<fmt:message key="header.home" var="homeLabel" />
+<fmt:message key="header.nav.main" var="navMainLabel" />
+<fmt:message key="header.users" var="usersLabel" />
+<fmt:message key="header.users.list" var="usersListLabel" />
+<fmt:message key="header.users.create" var="usersCreateLabel" />
 
-<script src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
-<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
-
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">	
-			<a class="navbar-brand" href="${s:mvcUrl('HC#index').build() }">My Resume</a>
-		</div>
-		<div class="navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">        
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="${s:mvcUrl('UC#showUsers').build() }">Listar</a></li>
-						<li><a href="${s:mvcUrl('UC#formAdd').build() }">Criar</a></li>
-					</ul>
-				</li>
-			</ul>
-			<ul class="nav navbar-nav">        
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Roles <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="${s:mvcUrl('RC#showRoles').build() }">Listar</a></li>
-						<li><a href="${s:mvcUrl('RC#formAdd').build() }">Criar</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-
-	</div>
-</nav>
+<!-- Top Bar Start -->
+<div class="topbar">
+   <!-- LOGO -->
+   <div class="topbar-left">
+      <div class="text-center">
+         <a href="${s:mvcUrl('HC#index').build() }" class="logo"><i class="mdi mdi-radar"></i> <span>${generalAppNameLabel }</span></a>
+      </div>
+   </div>
+   <!-- Button mobile view to collapse sidebar menu -->
+   <nav class="navbar-custom">
+      <ul class="list-inline float-right mb-0">
+         <li class="list-inline-item notification-list hide-phone">
+            <a class="nav-link waves-light waves-effect" href="#" id="btn-fullscreen">
+            <i class="mdi mdi-crop-free noti-icon"></i>
+            </a>
+         </li>
+         
+         <li class="list-inline-item dropdown notification-list">
+            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
+            <img src="/resume/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
+               <!-- item-->
+               <div class="dropdown-item noti-title">
+                  <h5 class="text-overflow"><small>Welcome ! John</small> </h5>
+               </div>
+               <!-- item-->
+               <a href="#" class="dropdown-item notify-item">
+               <i class="mdi mdi-logout"></i> <span>Logout</span>
+               </a>
+            </div>
+         </li>
+      </ul>
+      <ul class="list-inline menu-left mb-0">
+         <li class="float-left">
+            <button class="button-menu-mobile open-left waves-light waves-effect">
+            <i class="mdi mdi-menu"></i>
+            </button>
+         </li>
+      </ul>
+   </nav>
+</div>
+<!-- Top Bar End -->
+<!-- ========== Left Sidebar Start ========== -->
+<div class="left side-menu">
+   <div class="sidebar-inner slimscrollleft">
+      <!--- Divider -->
+      <div id="sidebar-menu">
+         <ul>
+            <li class="menu-title">${navMainLabel }</li>
+            <li>
+               <a href="${s:mvcUrl('HC#index').build() }" class="waves-effect waves-primary"><i
+                  class="ti-home"></i><span>${homeLabel }</span></a>
+            </li>
+            <li class="has_sub">
+               <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="ti-user"></i> <span>${usersLabel }</span>
+               <span class="menu-arrow"></span></a>
+               <ul class="list-unstyled">
+                  <li><a href="${s:mvcUrl('UC#showUsers').build() }">${usersListLabel }</a></li>
+                  <li><a href="${s:mvcUrl('UC#formAdd').build() }">${usersCreateLabel }</a></li>
+               </ul>
+            </li>
+         </ul>
+         <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+   </div>
+</div>
+<!-- Left Sidebar End -->

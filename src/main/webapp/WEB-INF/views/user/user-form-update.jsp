@@ -9,30 +9,39 @@
 <fmt:message key="user.page.user-form-update.title" var="titleLabel" />
 <fmt:message key="user.page.user-form-update.not.found" var="notFoundLabel" />
 <fmt:message key="button.save" var="saveLabel" />
+<fmt:message key="user.users" var="usersLabel" />
+<fmt:message key="user.edit" var="userEditLabel" />
 
 <tags:pageTemplate pageTitle="${titleLabel }">
-	<jsp:body>
-		<div class="container-fluid">
-			<div class="row" align="center">
-				<div class="col-md-12">
-					<h2>${titleLabel }</h2>
-					<c:choose>
-						<c:when test="${not empty user }">
-							<form:form class="form-horizontal" action="${s:mvcUrl('UC#update').arg(0,user.id).build() }" method="POST" commandName="user">
-								<user:user-form-inputs/>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-										<button type="submit" class="btn btn-primary">${saveLabel }</button>
-									</div>
-								</div>
-							</form:form>
-						</c:when>
-						<c:otherwise>
-							<h2>${notFoundLabel }</h2>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</div>
-		</div>
-	</jsp:body>
+   <jsp:body>
+      <div class="content-page">
+         <div class="content">
+            <div class="container-fluid">
+			   <tags:thumbnail pagePath="${titleLabel }" thumbnailTitle="${usersLabel }"/>
+               <div class="col-md-12">
+                  <div class="card-box">
+                     <c:choose>
+                        <c:when test="${not empty user }">
+                           <h4 class="m-t-0 m-b-30 header-title">${userEditLabel }</h4>
+                           <form:form class="form-horizontal" role="form" action="${s:mvcUrl('UC#update').arg(0,user.id).build() }" method="POST" commandName="user">
+                              <user:user-form-inputs/>
+                              <div class="form-group m-b-0 row">
+                                 <div class="offset-3 col-9">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">${saveLabel }</button>
+                                 </div>
+                              </div>
+                           </form:form>
+                        </c:when>
+                        <c:otherwise>
+                           <div class="alert alert-warning">
+                              ${notFoundLabel } <a href="${s:mvcUrl('UC#formAdd').build() }" class="alert-link">Criar Usuário</a>
+                           </div>
+                        </c:otherwise>
+                     </c:choose>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </jsp:body>
 </tags:pageTemplate>

@@ -1,49 +1,42 @@
-<style>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:message key="general.app.name" var="generalAppNameLabel" />
+<fmt:message key="general.app.year" var="generalAppYearLabel" />
 
-	/* Sticky footer styles
-	-------------------------------------------------- */
-	html {
-	  position: relative;
-	  min-height: 100%;
-	}
-	body {
-	  /* Margin bottom by footer height */
-	  margin-bottom: 60px;
-	}
-	.footer {
-	  position: absolute;
-	  bottom: 0;
-	  width: 100%;
-	  /* Set the fixed height of the footer here */
-	  height: 60px;
-	  background-color: #f5f5f5;
-	}
-	
-	
-	/* Custom page CSS
-	-------------------------------------------------- */
-	/* Not required for template or sticky footer method. */
-	
-	body > .container {
-	  padding: 60px 15px 0;
-	}
-	.container .text-muted {
-	  margin: 20px 0;
-	}
-	
-	.footer > .container {
-	  padding-right: 15px;
-	  padding-left: 15px;
-	}
-	
-	code {
-	  font-size: 80%;
-	}
-
-</style>
-
-<footer class="footer">
-	<div class="container">
-		<p class="text-muted">Footer go here.</p>
-	</div>
+<footer class="footer text-right">
+   ${generalAppYearLabel } © ${generalAppNameLabel }.
 </footer>
+<script>
+   var resizefunc = [];
+</script>
+<!-- Plugins  -->
+<script src="/resume/assets/js/jquery.min.js"></script>
+<script src="/resume/assets/js/popper.min.js"></script><!-- Popper for Bootstrap -->
+<script src="/resume/assets/js/bootstrap.min.js"></script>
+<script src="/resume/assets/js/detect.js"></script>
+<script src="/resume/assets/js/fastclick.js"></script>
+<script src="/resume/assets/js/jquery.slimscroll.js"></script>
+<script src="/resume/assets/js/jquery.blockUI.js"></script>
+<script src="/resume/assets/js/waves.js"></script>
+<script src="/resume/assets/js/wow.min.js"></script>
+<script src="/resume/assets/js/jquery.nicescroll.js"></script>
+<script src="/resume/assets/js/jquery.scrollTo.min.js"></script>
+<script src="/resume/plugins/switchery/switchery.min.js"></script>
+<!-- Counter Up  -->
+<script src="/resume/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="/resume/plugins/counterup/jquery.counterup.min.js"></script>
+<!--Morris Chart-->
+<script src="/resume/plugins/morris/morris.min.js"></script>
+<script src="/resume/plugins/raphael/raphael-min.js"></script>
+<!-- Page js  -->
+<script src="/resume/assets/pages/jquery.dashboard.js"></script>
+<!-- Custom main Js -->
+<script src="/resume/assets/js/jquery.core.js"></script>
+<script src="/resume/assets/js/jquery.app.js"></script>
+<script type="text/javascript">
+   jQuery(document).ready(function($) {
+       $('.counter').counterUp({
+           delay: 100,
+           time: 1200
+       });
+   });
+</script>
