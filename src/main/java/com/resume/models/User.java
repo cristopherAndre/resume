@@ -39,22 +39,22 @@ public class User implements UserDetails {
 	private String aboutMe;
 	private String resumeFilePath;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Role> roles = new ArrayList<Role>();
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Occupation> occupations = new ArrayList<Occupation>();
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Education> educations = new ArrayList<Education>();
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Address address = new Address();
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Skill> skills = new ArrayList<Skill>();
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<SocialMedia> socialMedias = new ArrayList<SocialMedia>();
 
 	public int getId() {
