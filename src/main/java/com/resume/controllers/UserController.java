@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.resume.converters.SkillPropertyEditor;
+import com.resume.daos.SkillRepository;
 import com.resume.daos.UserRepository;
+import com.resume.models.Skill;
 import com.resume.models.User;
 import com.resume.validation.UserValidation;
 
@@ -24,11 +27,15 @@ public class UserController {
 	@Autowired
 	private UserRepository repository;
 	
+	@Autowired
+	private SkillRepository skillRepository;
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new UserValidation());
+		binder.registerCustomEditor(Skill.class, new SkillPropertyEditor(skillRepository));
 	}
-
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView showUsers() {
 		ModelAndView modelAndView = new ModelAndView("user/user-list");
@@ -45,7 +52,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/form-add", method = RequestMethod.GET)
 	public ModelAndView formAdd(User user) {
-		return new ModelAndView("user/user-form-add");
+		return loadFormDependencies(new ModelAndView("user/user-form-add"));
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -64,6 +71,7 @@ public class UserController {
 	public ModelAndView load(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("user/user-form-update");
 		modelAndView.addObject("user", repository.findById(id));
+		loadFormDependencies(modelAndView);
 		return modelAndView;
 	}
 	
@@ -77,10 +85,15 @@ public class UserController {
 	public ModelAndView update(@PathVariable("id") Integer id, @Valid User user, BindingResult result) {
 		user.setId(id);
 		if (result.hasErrors()) {
-			return new ModelAndView("user/user-form-update");
+			return loadFormDependencies(new ModelAndView("user/user-form-update"));
 		}
 		repository.save(user);
 		return new ModelAndView("redirect:/user/list");
+	}
+	
+	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
+		modelAndView.addObject("skillList", skillRepository.findAll());
+		return modelAndView;
 	}
 
 }

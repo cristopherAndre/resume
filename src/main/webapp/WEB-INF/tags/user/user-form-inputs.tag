@@ -1,9 +1,11 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <fmt:message key="user.nickname" var="nickNameLabel" />
 <fmt:message key="user.email" var="emailLabel" />
 <fmt:message key="user.password" var="passwordLabel" />
+
 <div class="form-group row">
    <label for="nickName" class="col-2 col-form-label">${nickNameLabel }</label>
    <div class="col-10">
