@@ -4,6 +4,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
+<c:set var="appContext">${pageContext.request.contextPath}</c:set>
+
 <fmt:message key="general.app.name" var="generalAppNameLabel" />
 <fmt:message key="header.home" var="homeLabel" />
 <fmt:message key="header.nav.main" var="navMainLabel" />
@@ -31,7 +33,7 @@
          <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
-            <img src="/resume/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+            <img src="${appContext }/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
                <!-- item-->

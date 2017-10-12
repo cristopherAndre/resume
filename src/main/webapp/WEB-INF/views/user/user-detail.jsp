@@ -5,6 +5,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
+<c:set var="appContext">${pageContext.request.contextPath}</c:set>
+
 <fmt:message key="user.page.user-detail.title" var="titleLabel" />
 <fmt:message key="user.page.user-detail.not.found" var="notFoundLabel" />
 <fmt:message key="user.nickname" var="nicknameLabel" />
@@ -25,7 +27,7 @@
                            <div class="text-center card-box">
                               <div class="member-card">
                                  <div class="thumb-xl member-thumb m-b-10 center-block">
-                                    <img src="/resume/assets/images/users/avatar-1.jpg" class="rounded-circle img-thumbnail" alt="profile-image">
+                                    <img src="${appContext }/assets/images/users/avatar-1.jpg" class="rounded-circle img-thumbnail" alt="profile-image">
                                  </div>
                                  <div class="">
                                     <h5 class="m-b-5">${user.nickName }</h5>
