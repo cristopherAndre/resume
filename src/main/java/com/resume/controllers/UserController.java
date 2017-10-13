@@ -3,6 +3,8 @@ package com.resume.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -37,6 +39,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@Cacheable(value = "showUsers")
 	public ModelAndView showUsers() {
 		ModelAndView modelAndView = new ModelAndView("user/user-list");
 		modelAndView.addObject("users", repository.findAll());
@@ -44,6 +47,7 @@ public class UserController {
 	};
 
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+	@Cacheable(value = "showUserDetail")
 	public ModelAndView showUserDetail(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("user/user-detail");
 		modelAndView.addObject("user", repository.findById(id));
@@ -56,6 +60,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
 	public ModelAndView save(@Valid User user, BindingResult result) {
 		if (result.hasErrors()) {
 			return formAdd(user);
@@ -68,6 +73,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/{id}")
+	@Cacheable(value = "load")
 	public ModelAndView load(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("user/user-form-update");
 		modelAndView.addObject("user", repository.findById(id));
@@ -82,6 +88,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/update/{id}")
+	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
 	public ModelAndView update(@PathVariable("id") Integer id, @Valid User user, BindingResult result) {
 		user.setId(id);
 		if (result.hasErrors()) {
