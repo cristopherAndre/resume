@@ -80,8 +80,7 @@ public class UserController {
 		loadFormDependencies(modelAndView);
 		return modelAndView;
 	}
-	
-	
+		
 	@RequestMapping("/remove/{id}")
 	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
 	public ModelAndView remove(@PathVariable("id") Integer id) {
