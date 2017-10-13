@@ -21,7 +21,7 @@
       <link href="${appContext }/plugins/switchery/switchery.min.css" rel="stylesheet" />
       <link rel="stylesheet" href="${appContext }/plugins/morris/morris.css">
       <link href="${appContext }/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-      <link href="${appContext }/assets/css/icons.css" rel="stylesheet" type="text/css">
+<%--       <link href="${appContext }/assets/css/icons.css" rel="stylesheet" type="text/css"> --%>
       <link href="${appContext }/assets/css/style.css" rel="stylesheet" type="text/css">
       <script src="${appContext }/assets/js/modernizr.min.js"></script>
    </head>
