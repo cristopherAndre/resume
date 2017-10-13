@@ -82,6 +82,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/remove/{id}")
+	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
 	public ModelAndView remove(@PathVariable("id") Integer id) {
 		repository.delete(repository.findById(id));
 		return new ModelAndView("redirect:/user/list");
