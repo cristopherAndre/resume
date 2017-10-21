@@ -2,15 +2,15 @@ package com.resume.models;
 
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Occupation {
@@ -21,13 +21,18 @@ public class Occupation {
 	private String occupation;
 	private String description;
 	private String company;
-	@DateTimeFormat
+	@Temporal(TemporalType.DATE)
 	private Calendar startDate;
-	@DateTimeFormat
+	@Temporal(TemporalType.DATE)
 	private Calendar endDate;
 	private Boolean isCurrent;
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private Address address = new Address();
+	
+	@OneToOne(mappedBy="occupation")
+	@JoinColumn(unique=true)
+	private Address address;
+	
+	@ManyToOne
+	private User user;
 
 	public int getId() {
 		return id;
@@ -91,6 +96,14 @@ public class Occupation {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

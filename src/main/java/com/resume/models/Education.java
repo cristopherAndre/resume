@@ -6,8 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Education {
@@ -19,10 +20,13 @@ public class Education {
 	private String formation;
 	private String studyArea;
 	private String description;
-	@DateTimeFormat
+	@Temporal(TemporalType.DATE)
 	private Calendar startDate;
-	@DateTimeFormat
+	@Temporal(TemporalType.DATE)
 	private Calendar endDate;
+	
+	@ManyToOne
+	private User user;
 
 	public int getId() {
 		return id;
@@ -78,6 +82,14 @@ public class Education {
 
 	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

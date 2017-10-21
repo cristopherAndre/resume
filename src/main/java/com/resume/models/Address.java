@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Address {
@@ -14,7 +16,15 @@ public class Address {
 	private String country;
 	private String state;
 	private String city;
-
+	
+	@OneToOne
+	@JoinColumn(unique=true)
+	private User user;
+	
+	@OneToOne
+	@JoinColumn(unique=true)
+	private Occupation occupation;
+	
 	public int getId() {
 		return id;
 	}
@@ -45,6 +55,22 @@ public class Address {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Occupation getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(Occupation occupation) {
+		this.occupation = occupation;
 	}
 
 }

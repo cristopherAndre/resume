@@ -1,15 +1,14 @@
 package com.resume.models;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -19,7 +18,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="User_Profile")
+@Table(name = "User_Profile")
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -39,23 +38,29 @@ public class User implements UserDetails {
 	private String aboutMe;
 	private String resumeFilePath;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<Role> roles = new ArrayList<Role>();
+	// START ONE TO ONE RELATIONSHIP
+	@OneToOne(mappedBy = "user")
+	@JoinColumn(unique = true)
+	private Address address;
+	// END ONE TO ONE RELATIONSHIP
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<Occupation> occupations = new ArrayList<Occupation>();
+	// START ONE TO MANY RELATIONSHIP
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Skill> skills;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<Education> educations = new ArrayList<Education>();
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Occupation> occupations;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private Address address = new Address();
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Education> educations;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<Skill> skills = new ArrayList<Skill>();
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<SocialMedia> socialMedias;
+	// END ONE TO MANY RELATIONSHIP
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<SocialMedia> socialMedias = new ArrayList<SocialMedia>();
+	// Verificar
+	@ManyToMany
+	private List<Role> roles;
 
 	public int getId() {
 		return id;
@@ -157,46 +162,6 @@ public class User implements UserDetails {
 		this.roles = roles;
 	}
 
-	public List<Occupation> getOccupations() {
-		return occupations;
-	}
-
-	public void setOccupations(List<Occupation> occupations) {
-		this.occupations = occupations;
-	}
-
-	public List<Education> getEducations() {
-		return educations;
-	}
-
-	public void setEducations(List<Education> educations) {
-		this.educations = educations;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
-	}
-
-	public List<SocialMedia> getSocialMedias() {
-		return socialMedias;
-	}
-
-	public void setSocialMedias(List<SocialMedia> socialMedias) {
-		this.socialMedias = socialMedias;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.roles;
@@ -230,6 +195,46 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+
+	public List<Occupation> getOccupations() {
+		return occupations;
+	}
+
+	public void setOccupations(List<Occupation> occupations) {
+		this.occupations = occupations;
+	}
+
+	public List<Education> getEducations() {
+		return educations;
+	}
+
+	public void setEducations(List<Education> educations) {
+		this.educations = educations;
+	}
+
+	public List<SocialMedia> getSocialMedias() {
+		return socialMedias;
+	}
+
+	public void setSocialMedias(List<SocialMedia> socialMedias) {
+		this.socialMedias = socialMedias;
 	}
 
 }

@@ -14,7 +14,7 @@
       <div class="content-page">
          <div class="content">
             <div class="container-fluid">
-               <tags:thumbnail pagePath="${pathDashboardLabel }" thumbnailTitle="${titleLabel }"/>
+               <tags:breadcrumb pagePath="${pathDashboardLabel }" breadcrumbTitle="${titleLabel }"/>
                <div class="card m-b-20 card-body text-xs-center">
                   <h5 class="card-title">Welcome!</h5>
                   <p class="card-text">This web application is under construction.</p>

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Skill {
@@ -13,6 +14,9 @@ public class Skill {
 	private int id;
 	private String name;
 	private Integer percentage;
+	
+	@ManyToOne
+	private User user;
 
 	public int getId() {
 		return id;
@@ -36,6 +40,14 @@ public class Skill {
 
 	public void setPercentage(Integer percentage) {
 		this.percentage = percentage;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

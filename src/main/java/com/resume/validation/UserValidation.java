@@ -18,8 +18,13 @@ public class UserValidation implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmpty(errors, "nickName", FIELD_REQUIRED);
+		ValidationUtils.rejectIfEmpty(errors, "firstName", FIELD_REQUIRED);
+		ValidationUtils.rejectIfEmpty(errors, "lastName", FIELD_REQUIRED);
 		ValidationUtils.rejectIfEmpty(errors, "mail", FIELD_REQUIRED);
 		ValidationUtils.rejectIfEmpty(errors, "password", FIELD_REQUIRED);
+		ValidationUtils.rejectIfEmpty(errors, "title", FIELD_REQUIRED);
+		ValidationUtils.rejectIfEmpty(errors, "description", FIELD_REQUIRED);
+		ValidationUtils.rejectIfEmpty(errors, "aboutMe", FIELD_REQUIRED);
 	}
 
 }

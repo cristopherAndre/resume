@@ -3,8 +3,6 @@ package com.resume.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.resume.converters.SkillPropertyEditor;
-import com.resume.daos.SkillRepository;
 import com.resume.daos.UserRepository;
 import com.resume.models.Skill;
 import com.resume.models.User;
@@ -29,17 +25,17 @@ public class UserController {
 	@Autowired
 	private UserRepository repository;
 	
-	@Autowired
-	private SkillRepository skillRepository;
+//	@Autowired
+//	private SkillRepository skillRepository;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new UserValidation());
-		binder.registerCustomEditor(Skill.class, new SkillPropertyEditor(skillRepository));
+//		binder.registerCustomEditor(Skill.class, new SkillPropertyEditor(skillRepository));
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	@Cacheable(value = "showUsers")
+//	@Cacheable(value = "showUsers")
 	public ModelAndView showUsers() {
 		ModelAndView modelAndView = new ModelAndView("user/user-list");
 		modelAndView.addObject("users", repository.findAll());
@@ -47,7 +43,7 @@ public class UserController {
 	};
 
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-	@Cacheable(value = "showUserDetail")
+//	@Cacheable(value = "showUserDetail")
 	public ModelAndView showUserDetail(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("user/user-detail");
 		modelAndView.addObject("user", repository.findById(id));
@@ -56,52 +52,69 @@ public class UserController {
 	
 	@RequestMapping(value = "/form-add", method = RequestMethod.GET)
 	public ModelAndView formAdd(User user) {
-		return loadFormDependencies(new ModelAndView("user/user-form-add"));
+		return loadFormDependencies(new ModelAndView("user/user-form-add"), user);
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
+//	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
 	public ModelAndView save(@Valid User user, BindingResult result) {
 		if (result.hasErrors()) {
 			return formAdd(user);
 		}
-		if(user.getPassword() != null){
-			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		if (user != null) {
+			if (user.getPassword() != null) {
+				user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+			}
 		}
+		
+		manageSkills(user);
+		
 		repository.save(user);
 		return new ModelAndView("redirect:/user/list");
 	}
 	
-	@RequestMapping("/{id}")
-	@Cacheable(value = "load")
+	@RequestMapping("/edit/{id}")
+//	@Cacheable(value = "load")
 	public ModelAndView load(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("user/user-form-update");
-		modelAndView.addObject("user", repository.findById(id));
-		loadFormDependencies(modelAndView);
+		User user = repository.findById(id);
+		modelAndView.addObject("user", user);
+		loadFormDependencies(modelAndView, user);
 		return modelAndView;
 	}
 		
 	@RequestMapping("/remove/{id}")
-	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
+//	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
 	public ModelAndView remove(@PathVariable("id") Integer id) {
 		repository.delete(repository.findById(id));
 		return new ModelAndView("redirect:/user/list");
 	}
 	
 	@RequestMapping("/update/{id}")
-	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
+//	@CacheEvict(value = {"showUsers","showUserDetail", "load"}, allEntries = true)
 	public ModelAndView update(@PathVariable("id") Integer id, @Valid User user, BindingResult result) {
 		user.setId(id);
 		if (result.hasErrors()) {
-			return loadFormDependencies(new ModelAndView("user/user-form-update"));
+			return loadFormDependencies(new ModelAndView("user/user-form-update"), user);
 		}
+		manageSkills(user);
 		repository.save(user);
 		return new ModelAndView("redirect:/user/list");
 	}
 	
-	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
-		modelAndView.addObject("skillList", skillRepository.findAll());
+	private ModelAndView loadFormDependencies(ModelAndView modelAndView, User user) {
+//		modelAndView.addObject("skillList", user.getSkills());
 		return modelAndView;
+	}
+	
+	public void manageSkills(User user) {
+		if (user != null) {
+			if (user.getSkills() != null && !user.getSkills().isEmpty()) {
+				for (Skill skill : user.getSkills()) {
+					skill.setUser(user);
+				}
+			}
+		}
 	}
 
 }

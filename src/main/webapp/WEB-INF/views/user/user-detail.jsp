@@ -19,7 +19,7 @@
       <div class="content-page">
          <div class="content">
             <div class="container-fluid">
-               <tags:thumbnail pagePath="${titleLabel }" thumbnailTitle="${usersLabel }"/>
+               <tags:breadcrumb pagePath="${titleLabel }" breadcrumbTitle="${usersLabel }"/>
                <div class="col-lg-12">
                   <c:choose>
                      <c:when test="${not empty user }">
