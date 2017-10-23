@@ -10,9 +10,8 @@
 <meta charset="UTF-8">
 <title>Resume - Login</title>
 
-<c:url value="/resources/css" var="cssPath"/>
+<c:url value="/assets/css" var="cssPath"/>
 <link rel="stylesheet" href="${cssPath }/bootstrap.min.css">
-<link rel="stylesheet" href="${cssPath }/bootstrap-theme.min.css">
 
 <style type="text/css">
 	body {
