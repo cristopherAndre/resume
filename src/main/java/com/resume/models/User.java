@@ -1,5 +1,6 @@
 package com.resume.models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String nickName;
 	private String mail;
 	private String password;
@@ -46,7 +47,7 @@ public class User implements UserDetails {
 
 	// START ONE TO MANY RELATIONSHIP
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Skill> skills;
+	private List<Skill> skills = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Occupation> occupations;
@@ -62,11 +63,11 @@ public class User implements UserDetails {
 	@ManyToMany
 	private List<Role> roles;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

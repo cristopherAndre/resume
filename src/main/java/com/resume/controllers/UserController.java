@@ -1,5 +1,7 @@
 package com.resume.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.resume.daos.SkillRepository;
 import com.resume.daos.UserRepository;
 import com.resume.models.Skill;
 import com.resume.models.User;
@@ -25,8 +28,8 @@ public class UserController {
 	@Autowired
 	private UserRepository repository;
 	
-//	@Autowired
-//	private SkillRepository skillRepository;
+	@Autowired
+	private SkillRepository skillRepository;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -109,6 +112,15 @@ public class UserController {
 	
 	public void manageSkills(User user) {
 		if (user != null) {
+//			if (user.getId() != null) {
+//				List<Skill> userSkills = skillRepository.findByUser_id(user.getId());
+//				if (userSkills != null && !userSkills.isEmpty()) {
+//					userSkills.removeAll(user.getSkills());
+//					for (Skill skill : userSkills) {
+//						skillRepository.delete(skill);
+//					}
+//				}
+//			}
 			if (user.getSkills() != null && !user.getSkills().isEmpty()) {
 				for (Skill skill : user.getSkills()) {
 					skill.setUser(user);

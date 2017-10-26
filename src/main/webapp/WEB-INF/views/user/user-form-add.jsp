@@ -29,10 +29,8 @@
 		                  </div>
 		                  
 		                  <div class="card-box">
-		                  	<h4 class="m-t-0 m-b-30 header-title">${skillsLabel }</h4>
-		                  		<form:input path="skills[0].name"/>
-								<form:input path="skills[0].percentage"/>
-		                  
+		                  		<h4 class="m-t-0 m-b-30 header-title">${skillsLabel }</h4>
+								<skill:skill-form-inputs/>		                  
 		                  </div>
 		                  
 		                  <div class="card-box">
