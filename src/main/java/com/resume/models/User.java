@@ -1,6 +1,5 @@
 package com.resume.models;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class User implements UserDetails {
 
 	// START ONE TO MANY RELATIONSHIP
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Skill> skills = new ArrayList<>();
+	private List<Skill> skills;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Occupation> occupations;

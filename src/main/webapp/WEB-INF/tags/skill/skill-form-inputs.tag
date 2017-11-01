@@ -49,13 +49,14 @@
 			<c:forEach items="${user.skills }" var="skill" varStatus="status">
 				<c:set value="${status.index}" var="index"/>
 				
-				<tr>
+				<tr id="skills${index }.wrapper">
 	<%-- 				<td>${skill.name }</td> --%>
 	<%-- 				<td>${skill.percentage }</td> --%>
 					<form:hidden path="skills[${index }].id"/>
+					<form:hidden path="skills[${index }].remove"/>
 					<td><form:input path="skills[${index }].name"/></td>
 					<td><form:input path="skills[${index }].percentage"/></td>
-					<td><button type="button" class="removeSkill" data-skillid="${skill.id }" >Remover</button></td>
+					<td><button type="button" class="removeSkill" data-index="${index }" >Remover</button></td>
 				</tr>								
 			</c:forEach>										
 		</tbody>
@@ -69,31 +70,28 @@
 	$( document ).ready(function() {
 		
 		var index = ${fn:length(user.skills)};	
-		console.log('Habilidades size: ' + index);
 		
-		// Add a new Employee
 	    $("#add").off("click").on("click", function() {
-	        
-	    	var html = '<tr>';                    
-	//         html += '<td><input id="skills' + index + '.id" name="skills[' + index + '].id" type="text" value/></td>';
-	//         html += '<td> - </td>';
+	    	var html = '<tr id="skills' + index + '.wrapper">';                    
+			html += '<input id="skills' + index + '.remove" name="skills[' + index + '].remove" type="hidden" value="0"/>';
 	        html += '<td><input id="skills' + index + '.name" name="skills[' + index + '].name" type="text" value/></td>';
 	        html += '<td><input id="skills' + index + '.percentage" name="skills[' + index + '].percentage" type="text" value/></td>';
-// 	        html += '<td><button type="button" id="skill_'+index+'" >Remover</button></td>';
+ 	        html += '<td><button type="button" class="removeSkill" data-index="' + index + '" >Remover</button></td>';
 	        html += "</tr>";
-	        
 	        $('#skillsTable tbody').append(html);            
 	        index++;
 	        return false;
 	    });
 		
-	    $(".removeSkill").off("click").on("click", function() {	    	
-	    	var $button = $(this);
-	    	//consooe.log($button);
-	    	$button.closest("tr").remove();
+	    // OLD
+	    //$(".removeSkill").off("click").on("click", function() {
 	    	
-	    	
+	    $(document).on("click", ".removeSkill", function() {
+	    	var indexToRemove = $(this).data('index');
+	    	$('#skills' + indexToRemove + '\\.remove').val('1');
+	    	$('#skills' + indexToRemove + '\\.wrapper').hide();
 	    });
+	    
 		
 	});
 

@@ -1,5 +1,7 @@
 package com.resume.controllers;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -69,9 +71,7 @@ public class UserController {
 				user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 			}
 		}
-		
 		manageSkills(user);
-		
 		repository.save(user);
 		return new ModelAndView("redirect:/user/list");
 	}
@@ -100,8 +100,13 @@ public class UserController {
 		if (result.hasErrors()) {
 			return loadFormDependencies(new ModelAndView("user/user-form-update"), user);
 		}
-		manageSkills(user);
+		List<Skill> skillsToRemove = manageSkills(user);
 		repository.save(user);
+		for (Skill skill : skillsToRemove) {
+			if (skill.getId() != null) {
+				skillRepository.delete(skill);
+			}
+		}
 		return new ModelAndView("redirect:/user/list");
 	}
 	
@@ -110,23 +115,22 @@ public class UserController {
 		return modelAndView;
 	}
 	
-	public void manageSkills(User user) {
+	public List<Skill> manageSkills(User user) {
+		List<Skill> skillsToRemove = new ArrayList<>();
 		if (user != null) {
-//			if (user.getId() != null) {
-//				List<Skill> userSkills = skillRepository.findByUser_id(user.getId());
-//				if (userSkills != null && !userSkills.isEmpty()) {
-//					userSkills.removeAll(user.getSkills());
-//					for (Skill skill : userSkills) {
-//						skillRepository.delete(skill);
-//					}
-//				}
-//			}
-			if (user.getSkills() != null && !user.getSkills().isEmpty()) {
-				for (Skill skill : user.getSkills()) {
-					skill.setUser(user);
+			if (user.getSkills() != null) {
+				for (Iterator<Skill> i = user.getSkills().iterator(); i.hasNext();) {
+					Skill skill = i.next();
+					if (skill.getRemove() != null && skill.getRemove() == 1) {
+						skillsToRemove.add(skill);
+						i.remove();
+					} else {
+						skill.setUser(user);
+					}
 				}
 			}
 		}
+		return skillsToRemove;
 	}
 
 }
