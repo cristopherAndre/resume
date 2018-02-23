@@ -19,6 +19,7 @@
 <script src="${appContext }/dist/js/detect.js"></script>
 <script src="${appContext }/dist/js/fastclick.js"></script>
 <script src="${appContext }/dist/js/jquery.slimscroll.js"></script>
+<script src="${appContext }/dist/js/waves.js"></script>
 <script src="${appContext }/dist/js/wow.min.js"></script>
 <script src="${appContext }/dist/js/jquery.core.js"></script>
 <script src="${appContext }/dist/js/jquery.app.js"></script>
