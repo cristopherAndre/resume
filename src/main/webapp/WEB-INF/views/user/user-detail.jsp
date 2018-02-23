@@ -27,7 +27,7 @@
                            <div class="text-center card-box">
                               <div class="member-card">
                                  <div class="thumb-xl member-thumb m-b-10 center-block">
-                                    <img src="${appContext }/assets/images/users/avatar-1.jpg" class="rounded-circle img-thumbnail" alt="profile-image">
+                                    <img src="${appContext }/dist/images/users/avatar-1.jpg" class="rounded-circle img-thumbnail" alt="profile-image">
                                  </div>
                                  <div class="">
                                     <h5 class="m-b-5">${user.nickName }</h5>

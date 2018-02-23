@@ -63,7 +63,7 @@
 	</table>
 <%-- </c:if> --%>
 
-<script src="${appContext }/assets/js/jquery.min.js"></script>
+<script src="${appContext }/dist/js/jquery.min.js"></script>
 
 <script type="text/javascript">
 

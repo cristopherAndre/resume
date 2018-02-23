@@ -18,14 +18,14 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
       <meta name="author" content="Coderthemes">
-      <link rel="shortcut icon" href="${appContext }/assets/images/favicon_1.ico">
+      <link rel="shortcut icon" href="${appContext }/dist/images/favicon_1.ico">
       <title>${generalAppNameLabel } - ${titleLabel }</title>
       <link href="${appContext }/plugins/switchery/switchery.min.css" rel="stylesheet" />
       <link rel="stylesheet" href="${appContext }/plugins/morris/morris.css">
-      <link href="${appContext }/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-      <link href="${appContext }/assets/css/icons.css" rel="stylesheet" type="text/css">
-      <link href="${appContext }/assets/css/style.css" rel="stylesheet" type="text/css">
-      <script src="${appContext }/assets/js/modernizr.min.js"></script>
+      <link href="${appContext }/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+      <link href="${appContext }/dist/css/icons.min.css" rel="stylesheet" type="text/css">
+      <link href="${appContext }/dist/css/style.min.css" rel="stylesheet" type="text/css">
+      <script src="${appContext }/dist/js/modernizr.min.js"></script>
    </head>
    <body class="fixed-left">
       <div id="wrapper">
